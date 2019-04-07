@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -16,23 +18,23 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {ReportService.class, ObjectMapper.class})
+@ContextConfiguration(classes = {ReportService.class, ObjectMapper.class, SearchService.class})
 public class ReportServiceTest {
-
+    
     @Autowired
     ObjectMapper objectMapper;
-
+    
     @Autowired
     ReportService reportService;
-
+    
     private Datastandard datastandard;
-
+    
     @Before
     public void before() throws IOException {
         InputStream stream = getClass().getClassLoader().getResourceAsStream("datastandard.json");
         this.datastandard = objectMapper.readValue(stream, Datastandard.class);
     }
-
+    
     @Test
     public void testReport() {
         List<List<String>> report = reportService.report(datastandard, "leaf").map(row -> row.collect(toList())).collect(toList());

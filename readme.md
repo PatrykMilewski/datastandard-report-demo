@@ -6,6 +6,25 @@ The project objective is to generate a tabular report in CSV format from our dat
 
 Please fork the project to you own bitbucket, github, or other git hosting account, and give us access to the repository holding your solution.
 
+## Basic Authorization configuration
+
+ReportController can be tested with [ReportApplicationTests](src/test/java/com/stibo/demo/report/ReportApplicationTests.java)
+which is sending request `/report/acme/T_SHIRT` with Basic Authorization, that can be configured in
+[application-test.properties](src/main/resources/application-test.properties) with your user and password.
+
+```
+authorization.user:user
+authorization.password:password
+```
+
+#### Test results
+
+Results are written as csv file in path specified in [application-test.properties](src/main/resources/application-test.properties).
+
+```
+test.results.datafile:/tmp/data.csv
+```
+
 ## Data Standard
 
 We have a data standard, which describes the context for our products.
